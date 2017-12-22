@@ -1,0 +1,8 @@
+.height100{
+    height: 100%;
+}
+#capture-button{
+    position: absolute;
+    bottom: 2%;
+    right:2%;
+}
