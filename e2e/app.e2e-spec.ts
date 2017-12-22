@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('open-gtd-web App', () => {
+describe('ogtd-web App', () => {
   let page: AppPage;
 
   beforeEach(() => {
