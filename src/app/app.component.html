@@ -1,16 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-sidenav-container class="height100">
-    <mat-sidenav mode="push" [opened]="openSidenav$|async">
-        helloooo
+<mat-sidenav-container class="height100" (backdropClick)="globalUI.setSidebarOpen(false)">
+    <mat-sidenav *mobxAutorun mode="push" [opened]="globalUI.sidebarOpen">
+        <app-sidebar></app-sidebar>
     </mat-sidenav>
     <mat-sidenav-content>
         <div class="height100">
-            <mat-toolbar>
-                <button #sidenavButton mat-icon-button>
-                    <mat-icon>menu</mat-icon>
-                </button>
-                <span>My Application</span>
-            </mat-toolbar>
+            <app-navbar></app-navbar>
             <router-outlet>
             </router-outlet>
 

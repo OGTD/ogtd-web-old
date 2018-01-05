@@ -1,8 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/map';
+import { toStream } from 'mobx-utils';
+import { GlobalUIStore } from './stores/global.store';
+import { observable, action, isObservable } from 'mobx';
+
 import { MatButton } from '@angular/material';
-import 'rxjs/add/operator/scan';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +17,11 @@ import 'rxjs/add/operator/scan';
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  @ViewChild('sidenavButton')
-  sidenavButton: MatButton;
-  openSidenav$: Observable<boolean>;
+  public sidebarOpen$: Observable<boolean>;
+  constructor(public globalUI: GlobalUIStore) {
+    this.sidebarOpen$ = Observable.from(toStream(() => globalUI.test));
+  }
+
   ngOnInit(): void {
-    this.openSidenav$ = Observable.fromEvent<boolean>(this.sidenavButton._elementRef.nativeElement, 'click').scan(prev => !prev, false);
   }
 }
