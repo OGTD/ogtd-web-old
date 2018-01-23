@@ -1,17 +1,15 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<app-navbar></app-navbar>
 <mat-sidenav-container class="height100" (backdropClick)="globalUI.setSidebarOpen(false)">
-    <mat-sidenav *mobxAutorun mode="push" [opened]="globalUI.sidebarOpen">
+    <mat-sidenav mode="push" *mobxAutorun [opened]="globalUI.sidebarOpen">
         <app-sidebar></app-sidebar>
     </mat-sidenav>
     <mat-sidenav-content>
-        <div class="height100">
-            <app-navbar></app-navbar>
+        <div>
             <router-outlet>
             </router-outlet>
-
-            <button id="capture-button" mat-fab>
-                <mat-icon>add</mat-icon>
-            </button>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
+<button id="capture-button" mat-fab>
+    <mat-icon>add</mat-icon>
+</button>
