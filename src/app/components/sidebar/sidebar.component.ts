@@ -34,6 +34,9 @@ export class SidebarComponent implements OnInit {
     },
   ];
   constructor() { }
+  hello() {
+    console.log('hello');
+  }
 
   ngOnInit() {
   }

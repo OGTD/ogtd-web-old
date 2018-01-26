@@ -1,8 +1,10 @@
 <div id="background">
   <mat-toolbar color="primary">
-    <span>OGTD</span>
+    <a style="text-decoration: none;color:rgba(255,255,255,.87)" href="/">
+      <span>OGTD</span>
+    </a>
   </mat-toolbar>
-  <mat-card class="item" *ngFor="let item of list">
+  <mat-card (click)="hello()" *ngFor="let item of list" class="item">
     <mat-card-title>{{item.name}}</mat-card-title>
   </mat-card>
 </div>

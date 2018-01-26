@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 import { toStream } from 'mobx-utils';
-import { GlobalUIStore } from './stores/global.store';
+import { GlobalUIStore } from './stores/globalUI.store';
 import { observable, action, isObservable, autorun } from 'mobx';
 
 import { MatButton } from '@angular/material';

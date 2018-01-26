@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GlobalUIStore } from '../../stores/global.store';
+import { GlobalUIStore } from '../../stores/globalUI.store';
 
 @Component({
   selector: 'app-navbar',

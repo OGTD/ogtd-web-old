@@ -6,6 +6,6 @@ useStrict(true);
 
 @Injectable()
 export class OGTDStore {
-    @observable started = true;
+    @observable started = false;
 
 }
