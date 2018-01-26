@@ -1,3 +1,8 @@
 #background{
-    width: 200px;
+    width: 256px;
+    height: 100%;
+    background-color: #262f3d;
+}
+.item{
+    margin: 8px;
 }

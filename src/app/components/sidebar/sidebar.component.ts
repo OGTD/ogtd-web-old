@@ -7,6 +7,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  public list = [
+    {
+      name: 'Next actions',
+      id: 'next-actions'
+    },
+    {
+      name: 'In basket',
+      id: 'in'
+    },
+    {
+      name: 'Projects',
+      id: 'projects'
+    },
+    {
+      name: 'Incubating',
+      id: 'incubating'
+    },
+    {
+      name: 'Someday/Maybe',
+      id: 'someday-maybe'
+    },
+    {
+      name: 'Waiting for',
+      id: 'someday-maybe'
+    },
+  ];
   constructor() { }
 
   ngOnInit() {

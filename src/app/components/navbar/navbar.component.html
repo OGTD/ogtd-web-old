@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
-  <button #sidenavButton mat-icon-button (click)="globalUI.setSidebarOpen(true)">
+  <button *ngIf="globalUI.isMobile" #sidenavButton mat-icon-button (click)="globalUI.setSidebarOpen(true)">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>My Application</span>
+  <span>Home</span>
 </mat-toolbar>
