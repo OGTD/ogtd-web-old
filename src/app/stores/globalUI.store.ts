@@ -3,7 +3,6 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { isObservable, whyRun, observable, autorun, computed, action, reaction, when, toJS, useStrict } from 'mobx';
 import { OGTDStore } from './ogtd.store';
 
-useStrict(true);
 
 
 @Injectable()

@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatIconModule, MatSidenavModule, MatToolbarModule, MatCardModule, MatRippleModule } from '@angular/material';
 import { MobxAngularModule } from 'mobx-angular';
+import { useStrict } from 'mobx';
+useStrict(true);
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
 import { LayoutModule } from '@angular/cdk/layout';

@@ -2,5 +2,9 @@
   <button *ngIf="globalUI.isMobile" #sidenavButton mat-icon-button (click)="globalUI.setSidebarOpen(true)">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>Home</span>
+  <span>{{router.routeName}}</span>
+  <span fxFlex="fill"></span>
+  <button mat-icon-button>
+    <mat-icon>settings</mat-icon>
+  </button>
 </mat-toolbar>

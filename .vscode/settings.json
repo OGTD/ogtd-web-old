@@ -2,8 +2,12 @@
     "tslint.autoFixOnSave": true,
     "cSpell.words": [
         "autorun",
+        "be",
+        "dexie",
         "emojis",
         "injectable",
-        "mobx"
+        "mobx",
+        "to",
+        "truthy"
     ]
 }
