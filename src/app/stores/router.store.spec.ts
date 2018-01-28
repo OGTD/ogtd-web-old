@@ -34,17 +34,15 @@ describe('RouterStore', () => {
         const spy = jasmine.createSpy('routerSpy');
         const disposer = autorun(() => {
             spy(routerStore.url);
-            if (routerStore.url === url2) {
-                expect(spy).toHaveBeenCalledTimes(3);
-                expect(spy.calls.argsFor(0)).toEqual(['']);
-                expect(spy.calls.argsFor(1)).toEqual([url1]);
-                expect(spy.calls.argsFor(2)).toEqual([url2]);
-                expect(spy).not.toHaveBeenCalledWith('invalid');
-                disposer();
-            }
         });
         router.events.next(new NavigationEnd(0, 'invalid', url1));
         router.events.next(new NavigationEnd(0, 'invalid', url2));
+        expect(spy).toHaveBeenCalledTimes(3);
+        expect(spy.calls.argsFor(0)).toEqual(['']);
+        expect(spy.calls.argsFor(1)).toEqual([url1]);
+        expect(spy.calls.argsFor(2)).toEqual([url2]);
+        expect(spy).not.toHaveBeenCalledWith('invalid');
+        disposer();
     })));
     it('should navigate to the given urls', async(inject([RouterStore], (routerStore: RouterStore) => {
         const url1 = 'foo';
@@ -52,16 +50,14 @@ describe('RouterStore', () => {
         const spy = jasmine.createSpy('routerSpy');
         const dispose = autorun(() => {
             spy(routerStore.url);
-            if (routerStore.url === url2) {
-                expect(spy).toHaveBeenCalledTimes(3);
-                expect(spy.calls.argsFor(0)).toEqual(['']);
-                expect(spy.calls.argsFor(1)).toEqual([url1]);
-                expect(spy.calls.argsFor(2)).toEqual([url2]);
-                expect(spy).not.toHaveBeenCalledWith('invalid');
-                dispose();
-            }
         });
         routerStore.navigate(url1);
         routerStore.navigate(url2);
+        expect(spy).toHaveBeenCalledTimes(3);
+        expect(spy.calls.argsFor(0)).toEqual(['']);
+        expect(spy.calls.argsFor(1)).toEqual([url1]);
+        expect(spy.calls.argsFor(2)).toEqual([url2]);
+        expect(spy).not.toHaveBeenCalledWith('invalid');
+        dispose();
     })));
 });
