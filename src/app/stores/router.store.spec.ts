@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, async } from '@angular/core/testing';
 import { Router, NavigationEnd, RouterEvent } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { autorun } from 'mobx';
@@ -27,7 +27,7 @@ describe('RouterStore', () => {
     it('should be created', inject([RouterStore], (routerStore: RouterStore) => {
         expect(routerStore).toBeTruthy();
     }));
-    it('should update the url observable ', done => (inject([RouterStore], (routerStore: RouterStore) => {
+    it('should update the url observable ', async(inject([RouterStore], (routerStore: RouterStore) => {
         const url1 = 'foo';
         const url2 = 'bar';
         const router = TestBed.get(Router);
@@ -41,13 +41,12 @@ describe('RouterStore', () => {
                 expect(spy.calls.argsFor(2)).toEqual([url2]);
                 expect(spy).not.toHaveBeenCalledWith('invalid');
                 disposer();
-                done();
             }
         });
         router.events.next(new NavigationEnd(0, 'invalid', url1));
         router.events.next(new NavigationEnd(0, 'invalid', url2));
-    }))());
-    it('should navigate to the given urls', done => (inject([RouterStore], (routerStore: RouterStore) => {
+    })));
+    it('should navigate to the given urls', async(inject([RouterStore], (routerStore: RouterStore) => {
         const url1 = 'foo';
         const url2 = 'bar';
         const spy = jasmine.createSpy('routerSpy');
@@ -60,10 +59,9 @@ describe('RouterStore', () => {
                 expect(spy.calls.argsFor(2)).toEqual([url2]);
                 expect(spy).not.toHaveBeenCalledWith('invalid');
                 dispose();
-                done();
             }
         });
         routerStore.navigate(url1);
         routerStore.navigate(url2);
-    }))());
+    })));
 });
