@@ -10,6 +10,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { OGTDDatabaseService } from './services/ogtdDatabase.service';
+
 import { OGTDStore } from './stores/ogtd.store';
 import { GlobalUIStore } from './stores/globalUI.store';
 
@@ -45,7 +47,7 @@ import { RouterStore } from './stores/router.store';
     MobxAngularModule
   ],
 
-  providers: [GlobalUIStore, OGTDStore, StartGuard, RouterStore],
+  providers: [GlobalUIStore, OGTDStore, StartGuard, RouterStore, OGTDDatabaseService],
 
   bootstrap: [AppComponent]
 
