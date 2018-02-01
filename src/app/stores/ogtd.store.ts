@@ -2,18 +2,14 @@ import { Injectable } from '@angular/core';
 import { isObservable, observable, autorun, computed, action, reaction, toJS, IObservableArray, Atom } from 'mobx';
 import * as Fuse from 'fuse.js';
 import { OGTDDatabaseService } from '../services/ogtdDatabase.service';
+import Dexie from 'Dexie';
 import { IInBasketItem, OGTDType, IOGTDItem } from '../services/ogtdTypes';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEventPattern';
-import 'rxjs/add/operator/concatMap';
 import { IDatabaseChange, DatabaseChangeType } from '../../typings.d';
-import { Subscription } from 'rxjs/Subscription';
 
 class DexieListObservable<T> {
     private atom: Atom;
     private list: T[] = [];
-    private subscription: Subscription;
-    constructor(private db: OGTDDatabaseService, private tableName: string, private keyname = 'uid', private errorHandler = console.error) {
+    constructor(private db: Dexie, private tableName: string, private keyname = 'uid', private errorHandler = console.error) {
         const tables = this.db.tables.map(table => table.name);
         if (tables.indexOf(tableName) === -1) {
             throw new Error('The provided table name is not in the database');
@@ -35,47 +31,45 @@ class DexieListObservable<T> {
             return Promise.resolve();
         });
     }
+    private onChanges = (changes: IDatabaseChange[]) => {
+        for (const change of changes) {
+            if (change.table !== this.tableName) {
+                continue;
+            }
+            switch (change.type) {
+                // If you get a error on this line it means that dixie hasn't
+                // been updated to the latest version yet more info: https://github.com/dfahlander/Dexie.js/pull/655
+                // Very easy to fix by hand
+                case DatabaseChangeType.Create:
+                    this.list.push(change.obj);
+                    break;
+                case DatabaseChangeType.Update:
+                    for (const item of this.list) {
+                        if (item[this.keyname] === change.key) {
+                            Object.assign(item, change.mods);
+                            break;
+                        }
+                    }
+                    break;
+                case DatabaseChangeType.Delete:
+                    for (let i = 0; i < this.list.length; i++) {
+                        if (this.list[i][this.keyname] === change.key) {
+                            this.list.splice(i, 1);
+                            break;
+                        }
+                    }
+                    break;
+            }
+            this.atom.reportChanged();
+        }
+    }
     private onBecomeObserved() {
         this.initialFetch().then(() => {
-            this.subscription = Observable.fromEventPattern(
-                h => {
-                    this.db.on('changes').subscribe(<(changes: IDatabaseChange[]) => void>h);
-                },
-                h => {
-                    this.db.on('changes').unsubscribe(<(changes: IDatabaseChange[]) => void>h);
-                })
-                .concatMap((changes: IDatabaseChange[]) => changes)
-                .filter(change => change.table === this.tableName).subscribe(change => {
-                    switch (change.type) {
-                        // If you get a error on this line it means that dixie hasn't
-                        // been updated to the latest version yet more info: https://github.com/dfahlander/Dexie.js/pull/655
-                        // Very easy to fix by hand
-                        case DatabaseChangeType.Create:
-                            this.list.push(change.obj);
-                            break;
-                        case DatabaseChangeType.Update:
-                            for (const item of this.list) {
-                                if (item[this.keyname] === change.key) {
-                                    Object.assign(item, change.mods);
-                                    break;
-                                }
-                            }
-                            break;
-                        case DatabaseChangeType.Delete:
-                            for (let i = 0; i < this.list.length; i++) {
-                                if (this.list[i][this.keyname] === change.key) {
-                                    this.list.splice(i, 1);
-                                    break;
-                                }
-                            }
-                            break;
-                    }
-                    this.atom.reportChanged();
-                });
+            this.db.on('changes').subscribe(this.onChanges);
         }).catch(this.errorHandler);
     }
     private onBecomeUnObserved() {
-        this.subscription.unsubscribe();
+        this.db.on('changes').unsubscribe(this.onChanges);
     }
 }
 
