@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { sidebarRouteNames, RouterStore } from '../../stores/router.store';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,33 +8,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  public list = [
+  public list = Object.keys(sidebarRouteNames).reduce((list, key) => {
+    list.push({
+      name: sidebarRouteNames[key],
+      url: key,
+    });
+    return list;
+  }, []);
+  public liist = [
     {
       name: 'Next actions',
-      id: 'next-actions'
     },
     {
       name: 'In basket',
-      id: 'in'
     },
     {
       name: 'Projects',
-      id: 'projects'
     },
     {
       name: 'Incubating',
-      id: 'incubating'
     },
     {
       name: 'Someday/Maybe',
-      id: 'someday-maybe'
     },
     {
       name: 'Waiting for',
-      id: 'someday-maybe'
     },
   ];
-  constructor() { }
+  constructor(public router: RouterStore) { }
   hello() {
     console.log('hello');
   }

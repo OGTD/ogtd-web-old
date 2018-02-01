@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatIconModule, MatSidenavModule, MatToolbarModule, MatCardModule, MatRippleModule } from '@angular/material';
+import {
+  MatButtonModule, MatIconModule, MatSidenavModule, MatToolbarModule, MatCardModule,
+  MatRippleModule, MatDialogModule, MatFormFieldModule, MatInputModule
+} from '@angular/material';
 import { MobxAngularModule } from 'mobx-angular';
 import { useStrict } from 'mobx';
 useStrict(true);
@@ -22,6 +25,7 @@ import { StartComponent } from './routes/start/start.component';
 import { HomeComponent } from './routes/home/home.component';
 import { StartGuard } from './start.guard';
 import { RouterStore } from './stores/router.store';
+import { CaptureDialogComponent } from './components/capture-dialog/capture-dialog.component';
 
 
 @NgModule({
@@ -30,8 +34,10 @@ import { RouterStore } from './stores/router.store';
     NavbarComponent,
     SidebarComponent,
     StartComponent,
-    HomeComponent
+    HomeComponent,
+    CaptureDialogComponent
   ],
+  entryComponents: [CaptureDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -40,7 +46,10 @@ import { RouterStore } from './stores/router.store';
     AppRoutingModule,
     MatButtonModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatSidenavModule,
+    MatDialogModule,
     MatRippleModule,
     MatCardModule,
     MatToolbarModule,

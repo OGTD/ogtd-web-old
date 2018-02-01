@@ -1,0 +1,9 @@
+<mat-card-title>
+  Hi there</mat-card-title>
+<mat-form-field>
+  <textarea #content matInput placeholder="Inbox Item" matTextareaAutosize matAutosizeMinRows="5"></textarea>
+</mat-form-field>
+<div>
+  <button mat-button (click)="save(content.value)">Save</button>
+  <button mat-button (click)="close()" color="warn">Cancel</button>
+</div>

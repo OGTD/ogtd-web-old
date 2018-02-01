@@ -8,6 +8,7 @@ import { StartGuard } from './start.guard';
 const routes: Routes = [
   { path: 'start', component: StartComponent },
   { path: '', component: HomeComponent, canActivate: [StartGuard] },
+  { path: 'in', component: HomeComponent, canActivate: [StartGuard] },
 ];
 @NgModule({
   imports: [

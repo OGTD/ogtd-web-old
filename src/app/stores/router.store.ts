@@ -4,12 +4,16 @@ import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/filter';
 
 
+export const sidebarRouteNames = {
+    '/in': 'In Basket',
+};
 
-const routeNames = {
-    '/home': 'Home',
+export const otherRouteNames = {
     '': 'Home',
     '/start': 'Start'
 };
+export const routeNames = Object.assign({}, otherRouteNames, sidebarRouteNames);
+
 @Injectable()
 export class RouterStore {
     @observable url = '';

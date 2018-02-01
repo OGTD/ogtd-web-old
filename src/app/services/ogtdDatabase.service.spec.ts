@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { OGTDDexieService } from './ogtdDatabase.service';
+import { OGTDDatabaseService } from './ogtdDatabase.service';
 
 describe('ogtdDatabaseService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [OGTDDexieService]
+      providers: [OGTDDatabaseService]
     });
   });
 
-  it('should be created', inject([OGTDDexieService], (service: OGTDDexieService) => {
+  it('should be created', inject([OGTDDatabaseService], (service: OGTDDatabaseService) => {
     expect(service).toBeTruthy();
   }));
 });

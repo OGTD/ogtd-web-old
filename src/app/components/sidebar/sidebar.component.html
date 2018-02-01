@@ -4,7 +4,7 @@
       <span>OGTD</span>
     </a>
   </mat-toolbar>
-  <mat-card (click)="hello()" *ngFor="let item of list" class="item">
+  <mat-card (click)="router.navigate(item.url)" *ngFor="let item of list" class="item">
     <mat-card-title>{{item.name}}</mat-card-title>
   </mat-card>
 </div>
