@@ -28,5 +28,6 @@ export class CaptureDialogComponent implements OnInit, OnDestroy {
   }
   save(content) {
     this.ogtdStore.addToBasket(content);
+    this.dialogRef.close();
   }
 }

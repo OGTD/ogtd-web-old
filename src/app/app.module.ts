@@ -26,6 +26,7 @@ import { HomeComponent } from './routes/home/home.component';
 import { StartGuard } from './start.guard';
 import { RouterStore } from './stores/router.store';
 import { CaptureDialogComponent } from './components/capture-dialog/capture-dialog.component';
+import { InComponent } from './routes/in/in.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { CaptureDialogComponent } from './components/capture-dialog/capture-dial
     SidebarComponent,
     StartComponent,
     HomeComponent,
-    CaptureDialogComponent
+    CaptureDialogComponent,
+    InComponent
   ],
   entryComponents: [CaptureDialogComponent],
   imports: [

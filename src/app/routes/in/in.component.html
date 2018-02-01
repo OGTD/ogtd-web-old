@@ -1,0 +1,7 @@
+<div *mobxAutorun fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <mat-card fxFlex style="width:30%" *ngFor="let item of ogtd.inBasket.toArray()">
+    <mat-card-content>
+      {{item.content}}
+    </mat-card-content>
+  </mat-card>
+</div>

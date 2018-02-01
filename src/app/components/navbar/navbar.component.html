@@ -4,7 +4,7 @@
   </button>
   <span>{{router.routeName}}</span>
   <span fxFlex="fill"></span>
-  <button mat-icon-button>
+  <button mat-icon-button (click)="db.delete()">
     <mat-icon>settings</mat-icon>
   </button>
 </mat-toolbar>

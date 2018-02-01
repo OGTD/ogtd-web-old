@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { GlobalUIStore } from '../../stores/globalUI.store';
 import { RouterStore } from '../../stores/router.store';
+import { OGTDDatabaseService } from '../../services/ogtdDatabase.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,7 @@ import { RouterStore } from '../../stores/router.store';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public globalUI: GlobalUIStore, public router: RouterStore) { }
+  constructor(public globalUI: GlobalUIStore, public router: RouterStore, public db: OGTDDatabaseService) { }
 
   ngOnInit() {
   }
